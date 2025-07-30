@@ -4,7 +4,6 @@
 Use SO-ARM like an Handwriting Machines !
 
 ## Étymologie
-
 > Cali- : Du grec kállos, signifiant "beauté". Cela ancre immédiatement le mot dans la qualité esthétique que l'on retrouve en calligraphie.
 
 > Grapho- : Du grec gráphein, signifiant "écrire" ou "dessiner". Cela désigne l'acte de créer du texte ou des images.
@@ -17,11 +16,10 @@ Use SO-ARM like an Handwriting Machines !
 * "Handwriting Machines" / "Autopen"
 
 ## Quickstart whith LeRobot
-
 ```bash
 git clone https://github.com/huggingface/lerobot.git ; cd lerobot
 docker build -f docker/Dockerfile.user -t lerobot-user .
-docker run -it --device=/dev/bus/usb -v /dev/bus/usb:/dev/bus/usb --rm lerobot-user
+docker run -it --device=/dev/ -v /dev/:/dev/ --rm lerobot-user
 # Inside the container
 uv pip install --no-cache ".[feetech]"
 ```
