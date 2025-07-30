@@ -26,4 +26,25 @@ uv pip install --no-cache ".[feetech]"
 
 > Then, configure the motors : https://huggingface.co/docs/lerobot/so101?example=Linux#configure-the-motors
 
+# Actions control
+
+```bash
+# Locate USB ports
+python -m lerobot.find_port
+sudo chmod 666 /dev/ttyACM3
+sudo chmod 666 /dev/ttyACM4
+
+# Setup motors
+python -m lerobot.setup_motors --robot.type=so100_follower --robot.port=/dev/ttyACM4
+python -m lerobot.setup_motors --robot.type=so100_leader --robot.port=/dev/ttyACM3
+python -m lerobot.setup_motors --teleop.type=so100_leader --teleop.port=/dev/ttyACM3
+
+# Calibrate
+python -m lerobot.calibrate --robot.type=so100_follower --robot.port=/dev/ttyACM4 --robot.id=follower_arm
+python -m lerobot.calibrate --teleop.type=so100_leader --teleop.port=/dev/ttyACM3 --teleop.id=leader_arm
+
+# Teleoperate
+python -m lerobot.teleoperate --robot.type=so100_follower --robot.port=/dev/ttyACM4 --robot.id=follower_arm --teleop.type=so100_leader --teleop.port=/dev/ttyACM3 --teleop.id=leader_arm
+```bash
+
 > Play : https://huggingface.co/docs/lerobot/getting_started_real_world_robot
