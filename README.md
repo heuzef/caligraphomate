@@ -19,13 +19,13 @@ Use SO-ARM like an Handwriting Machines !
 ## Quickstart whith LeRobot
 
 ```bash
-git clone https://github.com/huggingface/lerobot.git
+git clone https://github.com/huggingface/lerobot.git ; cd lerobot
 docker build -f docker/Dockerfile.user -t lerobot-user .
 docker run -it --device=/dev/bus/usb -v /dev/bus/usb:/dev/bus/usb --rm lerobot-user
 # Inside the container
 uv pip install --no-cache ".[feetech]"
 ```
 
-Then, configure the motors : https://huggingface.co/docs/lerobot/so101?example=Linux#configure-the-motors
+> Then, configure the motors : https://huggingface.co/docs/lerobot/so101?example=Linux#configure-the-motors
 
-Play : https://huggingface.co/docs/lerobot/getting_started_real_world_robot
+> Play : https://huggingface.co/docs/lerobot/getting_started_real_world_robot
