@@ -1,0 +1,1 @@
+sudo docker run -it --device=/dev/ -v /dev/:/dev/ -v ~/GIT/caligraphomate/user_lerobot/:/home/user_lerobot/ --rm lerobot-user
