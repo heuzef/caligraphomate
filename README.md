@@ -19,7 +19,7 @@ Use SO-ARM like an Handwriting Machines !
 ```bash
 git clone https://github.com/huggingface/lerobot.git ; cd lerobot
 docker build -f docker/Dockerfile.user -t lerobot-user .
-docker run -it --device=/dev/ -v /dev/:/dev/ --rm lerobot-user
+sudo docker run -it --device=/dev/ -v /dev/:/dev/ -v ~/GIT/caligraphomate/user_lerobot/:/home/user_lerobot/ --rm lerobot-user
 # Inside the container
 uv pip install --no-cache ".[feetech]"
 ```
