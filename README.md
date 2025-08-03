@@ -35,12 +35,12 @@ pip install ".[aloha,feetech]"
 ## Setup Caligraphomate
 
 ```bash
-echo HUGGINGFACE_TOKEN=********** >> /etc/environment
+sudo echo HUGGINGFACE_TOKEN=********** >> /etc/environment
 git config --global credential.helper store
 hf auth login --token ${HUGGINGFACE_TOKEN} --add-to-git-credential
 git clone git@github.com:heuzef/caligraphomate.git
 cd caligraphomate
-sh env.sh
+sudo sh env.sh
 cp -vr huggingface ~/.cache/
 ```
 
