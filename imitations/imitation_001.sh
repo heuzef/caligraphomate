@@ -1,4 +1,5 @@
 #!/bin/bash
+RUN="imitation_001"
 PUSH_TO_HUB="False"
 EPISODE_TIME_S="30"
 RESET_TIME_S="30"
@@ -6,7 +7,7 @@ NUM_EPISODES="1"
 ##############################
 
 if [[ "$1" == "record" ]]; then
-    echo "Recording $0"
+    echo "Recording $RUN"
     python -m lerobot.record \
         --robot.type=so100_follower \
         --robot.port=$PORT_FOLLOWER \
@@ -20,18 +21,18 @@ if [[ "$1" == "record" ]]; then
         --dataset.episode_time_s=$EPISODE_TIME_S \
         --dataset.reset_time_s=$RESET_TIME_S \
         --dataset.num_episodes=$NUM_EPISODES \
-        --dataset.single_task="$0"
+        --dataset.single_task="$RUN"
 
 elif [[ "$1" == "replay" ]]; then
-    echo "Replaying $0"
+    echo "Replaying $RUN"
     python -m lerobot.replay \
         --robot.type=so100_follower \
         --robot.port=$PORT_FOLLOWER \
         --robot.id=follower \
-        --dataset.repo_id=$HF_USER/$0 \
+        --dataset.repo_id=$HF_USER/$RUN \
         --dataset.episode=0
 
 else
-    echo "Need arguments for $0"
+    echo "Need arguments for $RUN"
     echo "record or replay"
 fi
