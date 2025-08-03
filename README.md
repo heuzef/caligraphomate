@@ -15,13 +15,31 @@ Use SO-ARM like an Handwriting Machines !
 * https://axidraw.com
 * "Handwriting Machines" / "Autopen"
 
-## Quickstart whith LeRobot
+## Quickstart whith LeRobot on Ubuntu
+
 ```bash
-git clone https://github.com/huggingface/lerobot.git ; cd lerobot
-docker build -f docker/Dockerfile.user -t lerobot-user .
-sudo docker run -it --device=/dev/ -v /dev/:/dev/ -v ~/GIT/caligraphomate/user_lerobot/:/home/user_lerobot/ --rm lerobot-user
-# Inside the container
-uv pip install --no-cache ".[feetech]"
+sudo apt update ; sudo apt upgrade
+
+sudo apt-get install -y python3-full ffmpeg cmake build-essential pkg-config libavformat-dev libavcodec-dev libavdevice-dev libavutil-dev libswscale-dev libswresample-dev libavfilter-dev pkg-config python-is-python3
+
+git clone https://github.com/huggingface/lerobot.git
+cd lerobot
+
+python -m venv .venv
+source .venv/bin/activate
+
+pip install -e .
+pip install ".[aloha,feetech]"
+```
+
+## Setup Caligraphomate
+
+```bash
+export HUGGINGFACE_TOKEN=**********
+git clone git@github.com:heuzef/caligraphomate.git
+cd caligraphomate
+sh env.sh
+cp -vr huggingface ~/.cache/
 ```
 
 > Then, configure the motors : https://huggingface.co/docs/lerobot/so101?example=Linux#configure-the-motors
