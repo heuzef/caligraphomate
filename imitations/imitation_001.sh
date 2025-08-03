@@ -22,7 +22,7 @@ if [[ "$1" == "record" ]]; then
         --dataset.num_episodes=$NUM_EPISODES \
         --dataset.single_task="$0"
 
-if [[ "$1" == "replay" ]]; then
+elif [[ "$1" == "replay" ]]; then
     echo "Replaying $0"
     python -m lerobot.replay \
         --robot.type=so100_follower \
@@ -30,7 +30,8 @@ if [[ "$1" == "replay" ]]; then
         --robot.id=follower \
         --dataset.repo_id=$HF_USER/$0 \
         --dataset.episode=0
+
 else
-    echo "Need argument for $0"
-    echo "Need argument for $0"
+    echo "Need arguments for $0"
+    echo "record or replay"
 fi
