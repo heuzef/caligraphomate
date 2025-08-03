@@ -1,0 +1,4 @@
+matplotlib
+freetype-py
+pyserial
+svgwrite
