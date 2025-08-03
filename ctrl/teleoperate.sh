@@ -1,1 +1,1 @@
-python -m lerobot.teleoperate --robot.type=so100_follower --robot.id=follower --robot.port=$PORT_FOLLOWER --teleop.type=so100_leader --teleop.id=leader --teleop.port=$PORT_LEADER
+python -m lerobot.teleoperate --robot.type=so100_follower --robot.id=follower --robot.port={$PORT_FOLLOWER} --teleop.type=so100_leader --teleop.id=leader --teleop.port={$PORT_LEADER}
