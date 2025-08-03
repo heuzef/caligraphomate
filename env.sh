@@ -1,5 +1,5 @@
-export PORT_FOLLOWER=/dev/ttyACM4
-export PORT_LEADER=/dev/ttyACM3
+export PORT_FOLLOWER=/dev/ttyACM0
+export PORT_LEADER=/dev/ttyACM1
 export HF_USER=Heuzef
 echo $PORT_FOLLOWER
 echo $PORT_LEADER

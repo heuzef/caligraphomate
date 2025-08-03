@@ -1,12 +1,12 @@
 python -m lerobot.record \
     --robot.type=so100_follower \
-    --robot.port=/dev/ttyACM4 \
+    --robot.port=$PORT_FOLLOWER \
     --robot.id=follower \
     --teleop.type=so100_leader \
-    --teleop.port=/dev/ttyACM3 \
+    --teleop.port=$PORT_LEADER \
     --teleop.id=leader \
-    --display_data=false \
-    --dataset.push_to_hub=False \
-    --dataset.repo_id=Heuzef/record-test \
+    --display_data=True \
+    --dataset.push_to_hub=True \
+    --dataset.repo_id=$HF_USER/record-test \
     --dataset.num_episodes=1 \
     --dataset.single_task="Test"

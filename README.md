@@ -36,6 +36,8 @@ pip install ".[aloha,feetech]"
 
 ```bash
 export HUGGINGFACE_TOKEN=**********
+git config --global credential.helper store
+hf auth login --token ${HUGGINGFACE_TOKEN} --add-to-git-credential
 git clone git@github.com:heuzef/caligraphomate.git
 cd caligraphomate
 sh env.sh
@@ -49,20 +51,20 @@ cp -vr huggingface ~/.cache/
 ```bash
 # Locate USB ports
 python -m lerobot.find_port
-sudo chmod 666 /dev/ttyACM3
-sudo chmod 666 /dev/ttyACM4
+sudo chmod 666 /dev/ttyACM0
+sudo chmod 666 /dev/ttyACM1
 
 # Setup motors
-python -m lerobot.setup_motors --robot.type=so100_follower --robot.port=/dev/ttyACM4
-python -m lerobot.setup_motors --robot.type=so100_leader --robot.port=/dev/ttyACM3
-python -m lerobot.setup_motors --teleop.type=so100_leader --teleop.port=/dev/ttyACM3
+python -m lerobot.setup_motors --robot.type=so100_follower --robot.port=$PORT_FOLLOWER
+python -m lerobot.setup_motors --robot.type=so100_leader --robot.port=$PORT_LEADER
+python -m lerobot.setup_motors --teleop.type=so100_leader --teleop.port=$PORT_LEADER
 
 # Calibrate
-python -m lerobot.calibrate --robot.type=so100_follower --robot.port=/dev/ttyACM4 --robot.id=follower_arm
-python -m lerobot.calibrate --teleop.type=so100_leader --teleop.port=/dev/ttyACM3 --teleop.id=leader_arm
+python -m lerobot.calibrate --robot.type=so100_follower --robot.port=$PORT_FOLLOWER --robot.id=follower
+python -m lerobot.calibrate --teleop.type=so100_leader --teleop.port=$PORT_LEADER --teleop.id=leader
 
 # Teleoperate
-python -m lerobot.teleoperate --robot.type=so100_follower --robot.port=/dev/ttyACM4 --robot.id=follower_arm --teleop.type=so100_leader --teleop.port=/dev/ttyACM3 --teleop.id=leader_arm
+python -m lerobot.teleoperate --robot.type=so100_follower --robot.port=$PORT_FOLLOWER --robot.id=follower --teleop.type=so100_leader --teleop.port=$PORT_LEADER --teleop.id=leader
 ```bash
 
 > Play : https://huggingface.co/docs/lerobot/getting_started_real_world_robot
