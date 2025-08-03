@@ -7,6 +7,7 @@ NUM_EPISODES="1"
 ##############################
 
 if [[ "$1" == "record" ]]; then
+    rm -rfv ~/.cache/huggingface/lerobot/$HF_USER/$RUN/
     echo "Recording $RUN"
     python -m lerobot.record \
         --robot.type=so100_follower \
