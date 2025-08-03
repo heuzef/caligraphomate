@@ -1,12 +1,12 @@
 python -m lerobot.record \
     --robot.type=so100_follower \
-    --robot.port={$PORT_FOLLOWER} \
+    --robot.port=$PORT_FOLLOWER \
     --robot.id=follower \
     --teleop.type=so100_leader \
-    --teleop.port={$PORT_LEADER} \
+    --teleop.port=$PORT_LEADER \
     --teleop.id=leader \
     --display_data=True \
     --dataset.push_to_hub=True \
-    --dataset.repo_id={$HF_USER}/record-test \
+    --dataset.repo_id=$HF_USER/record-test \
     --dataset.num_episodes=1 \
     --dataset.single_task="Test"
