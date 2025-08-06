@@ -65,6 +65,16 @@ python -m lerobot.calibrate --teleop.type=so100_leader --teleop.port=$PORT_LEADE
 
 # Teleoperate
 python -m lerobot.teleoperate --robot.type=so100_follower --robot.port=$PORT_FOLLOWER --robot.id=follower --teleop.type=so100_leader --teleop.port=$PORT_LEADER --teleop.id=leader
-```bash
+```
 
 > Play : https://huggingface.co/docs/lerobot/getting_started_real_world_robot
+
+# Drive Caligraphomate
+
+```bash
+cd ~/GIT/caligraphomate
+source ~/GIT/lerobot/.venv/bin/activate
+sudo chmod 666 /dev/ttyACM0 /dev/ttyACM1
+cat /etc/environment
+./ctrl/teleoperate.sh 
+```
