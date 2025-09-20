@@ -56,7 +56,6 @@ sudo chmod 666 /dev/ttyACM1
 
 # Setup motors
 python -m lerobot.setup_motors --robot.type=so100_follower --robot.port=$PORT_FOLLOWER
-python -m lerobot.setup_motors --robot.type=so100_leader --robot.port=$PORT_LEADER
 python -m lerobot.setup_motors --teleop.type=so100_leader --teleop.port=$PORT_LEADER
 
 # Calibrate
