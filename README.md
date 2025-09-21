@@ -63,7 +63,7 @@ python -m lerobot.calibrate --robot.type=so100_follower --robot.port=$PORT_FOLLO
 python -m lerobot.calibrate --teleop.type=so100_leader --teleop.port=$PORT_LEADER --teleop.id=leader
 
 # Teleoperate
-python -m lerobot.teleoperate --robot.type=so100_follower --robot.port=$PORT_FOLLOWER --robot.id=follower --teleop.type=so100_leader --teleop.port=$PORT_LEADER --teleop.id=leader
+python -m lerobot.teleoperate --robot.type=so100_follower --robot.port=$PORT_FOLLOWER --robot.id=follower --robot.cameras="{ front: {type: opencv, index_or_path: 2, width: 1280, height: 720, fps: 30}}" --teleop.type=so100_leader --teleop.port=$PORT_LEADER --teleop.id=leader
 ```
 
 > Play : https://huggingface.co/docs/lerobot/getting_started_real_world_robot
