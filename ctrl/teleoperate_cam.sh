@@ -1,0 +1,1 @@
+python -m lerobot.teleoperate --robot.type=so100_follower --robot.id=follower --robot.cameras="{ front: {type: opencv, index_or_path: 2, width: 1280, height: 720, fps: 30}}" --robot.port=$PORT_FOLLOWER --teleop.type=so100_leader --teleop.id=leader --teleop.port=$PORT_LEADER
