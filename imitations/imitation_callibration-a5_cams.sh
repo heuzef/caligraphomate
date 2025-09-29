@@ -1,8 +1,8 @@
 #!/bin/bash
 RUN="record-callibration-a5_cams"
 PUSH_TO_HUB="True"
-EPISODE_TIME_S="60"
-RESET_TIME_S="60"
+EPISODE_TIME_S="30"
+RESET_TIME_S="30"
 NUM_EPISODES="1"
 ##############################
 
