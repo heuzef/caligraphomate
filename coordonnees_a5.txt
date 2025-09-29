@@ -1,10 +1,10 @@
 centre
-shoulder_pan.pos    
-shoulder_lift.pos   
-elbow_flex.pos
-wrist_flex.pos
-wrist_roll.pos    
-gripper.pos        
+shoulder_pan.pos    -4.44
+shoulder_lift.pos   51.26
+elbow_flex.pos      27.17
+wrist_flex.pos      -80.35
+wrist_roll.pos      -49.79
+gripper.pos         0.08      
 
 bas_droit
 shoulder_pan.pos    16.10
@@ -23,17 +23,17 @@ wrist_roll.pos      -47.89
 gripper.pos         0.17       
 
 haut_droit
-shoulder_pan.pos    
-shoulder_lift.pos   
-elbow_flex.pos
-wrist_flex.pos
-wrist_roll.pos    
-gripper.pos        
+shoulder_pan.pos    8.32
+shoulder_lift.pos   80.40
+elbow_flex.pos      -52.08
+wrist_flex.pos      -33.84
+wrist_roll.pos      -49.55
+gripper.pos         4.38
 
 haut_gauche
-shoulder_pan.pos    
-shoulder_lift.pos   
-elbow_flex.pos
-wrist_flex.pos
-wrist_roll.pos    
-gripper.pos        
+shoulder_pan.pos    -17.20
+shoulder_lift.pos   81.32
+elbow_flex.pos      -61.68
+wrist_flex.pos      -27.26
+wrist_roll.pos      -48.72
+gripper.pos         0.08
