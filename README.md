@@ -77,3 +77,9 @@ sudo chmod 666 /dev/ttyACM0 /dev/ttyACM1
 cat /etc/environment
 ./ctrl/teleoperate.sh 
 ```
+# Phosphobot
+Le service est lancé au démarrage. Il faut ouvrir un tunnel ssh pour executer phosphobot en local dans le navigateur
+
+```bash
+ssh -p XXXX -L 8020:localhost:8020 user@domain.com
+```
