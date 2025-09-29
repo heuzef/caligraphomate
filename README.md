@@ -81,5 +81,5 @@ cat /etc/environment
 Le service est lancé au démarrage. Il faut ouvrir un tunnel ssh pour executer phosphobot en local dans le navigateur
 
 ```bash
-ssh -p XXXX -L 8020:localhost:8020 user@domain.com
+ssh -p XXXX -L 8020:localhost:8020 user@domain.com -N
 ```
