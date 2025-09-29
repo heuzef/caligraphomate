@@ -78,8 +78,22 @@ cat /etc/environment
 ./ctrl/teleoperate.sh 
 ```
 # Phosphobot
-Le service est lancé au démarrage. Il faut ouvrir un tunnel ssh pour executer phosphobot en local dans le navigateur
+Phosphobot est un service qui permet de piloter et entrainer différents robots par le biais du navigateur.
+La documentatin est accessible ici : https://docs.phospho.ai/welcome
 
+## Installation sur linux
+```bash
+curl -fsSL https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.sh | sudo bash
+```
+
+## Lancement de phosphobot
+Le service est lancé au démarrage. La commande de lancement du service est la suivante :
+```bash
+phosphobot run
+```
+
+## Accés au service 
+Il faut ouvrir un tunnel ssh pour executer phosphobot en local dans le navigateur
 ```bash
 ssh -p XXXX -L 8020:localhost:8020 user@domain.com -N
 ```
