@@ -1,39 +1,56 @@
-centre
-shoulder_pan.pos    -4.44
-shoulder_lift.pos   51.26
-elbow_flex.pos      27.17
-wrist_flex.pos      -80.35
-wrist_roll.pos      -49.79
-gripper.pos         0.08      
+1. gripper -> Toujours fermé -> 0.10
+2. wrist_roll -> Toujours à 90° pour tenir le feutre -> -50.00
+3. wrist_flex -> Pour la verticalitée -> -80.00 (centre) / -100.00 (en bas) / -30.00 (en haut)
+4. elbow_flex -> Pour la verticalitée -> 30.00 (centre) / 50.00 (en bas) / -50.00 (en haut)
+5. shoulder_lift -> Pour l'horizontalitée -> 50.00 (centre) / 50.00 (en bas) / 80.00 (en haut)
+6. shoulder_pan -> Pour la direction -> -0.00 (centre) / 10.00 (à droite) / -20.00 (à gauche)
 
-bas_droit
-shoulder_pan.pos    16.10
-shoulder_lift.pos   49.58
-elbow_flex.pos      52.17
+
+CENTER
+---
+shoulder_pan.pos    0.00
+shoulder_lift.pos   50.00
+elbow_flex.pos      30.00
+wrist_flex.pos      -80.00
+wrist_roll.pos      -50.00
+gripper.pos         0.10 
+
+
+BOTTOM_RIGHT
+---
+shoulder_pan.pos    10.00
+shoulder_lift.pos   50.00
+elbow_flex.pos      50.00
 wrist_flex.pos      -100.00
-wrist_roll.pos      -51.31
-gripper.pos         0.08
+wrist_roll.pos      -50.00
+gripper.pos         0.10
 
-bas_gauche
-shoulder_pan.pos    -25.34
-shoulder_lift.pos   49.16
-elbow_flex.pos      51.72
+
+BOTTOM_LEFT
+---
+shoulder_pan.pos    -20.00
+shoulder_lift.pos   50.00
+elbow_flex.pos      50.00
 wrist_flex.pos      -100.00
-wrist_roll.pos      -47.89
-gripper.pos         0.17       
+wrist_roll.pos      -50.00
+gripper.pos         0.10
 
-haut_droit
-shoulder_pan.pos    8.32
-shoulder_lift.pos   80.40
-elbow_flex.pos      -52.08
-wrist_flex.pos      -33.84
-wrist_roll.pos      -49.55
-gripper.pos         4.38
 
-haut_gauche
-shoulder_pan.pos    -17.20
-shoulder_lift.pos   81.32
-elbow_flex.pos      -61.68
-wrist_flex.pos      -27.26
-wrist_roll.pos      -48.72
-gripper.pos         0.08
+TOP_RIGHT
+---
+shoulder_pan.pos    10.00
+shoulder_lift.pos   80.00
+elbow_flex.pos      -50.00
+wrist_flex.pos      -30.00
+wrist_roll.pos      -50.00
+gripper.pos         0.10
+
+
+TOP_LEFT
+---
+shoulder_pan.pos    -20.00
+shoulder_lift.pos   80.00
+elbow_flex.pos      -50.00
+wrist_flex.pos      -30.00
+wrist_roll.pos      -50.00
+gripper.pos         0.10
