@@ -4,7 +4,6 @@ After=network.target
 
 [Service]
 Type=simple
-User=heuzef
 WorkingDirectory=/home/heuzef
 ExecStart=/usr/bin/env phosphobot run
 Restart=on-failure
