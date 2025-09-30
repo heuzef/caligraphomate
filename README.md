@@ -18,9 +18,9 @@ Use SO-ARM like an Handwriting Machines !
 ## Quickstart whith LeRobot on Ubuntu
 
 ```bash
+sudo ufw disable
 sudo apt update ; sudo apt upgrade
-
-sudo apt-get install -y python3-full ffmpeg cmake build-essential pkg-config libavformat-dev libavcodec-dev libavdevice-dev libavutil-dev libswscale-dev libswresample-dev libavfilter-dev pkg-config python-is-python3
+sudo apt-get install -y python3-full ffmpeg cmake build-essential pkg-config libavformat-dev libavcodec-dev libavdevice-dev libavutil-dev libswscale-dev libswresample-dev libavfilter-dev pkg-config python-is-python3 curl
 
 git clone https://github.com/huggingface/lerobot.git
 cd lerobot
@@ -77,23 +77,36 @@ sudo chmod 666 /dev/ttyACM0 /dev/ttyACM1
 cat /etc/environment
 ./ctrl/teleoperate.sh 
 ```
-# Phosphobot
-Phosphobot est un service qui permet de piloter et entrainer différents robots par le biais du navigateur.
-La documentatin est accessible ici : https://docs.phospho.ai/welcome
 
-## Installation sur linux
+# Phosphobot
+
+> Open source service for full web control the Arm La documentatin est accessible ici : https://docs.phospho.ai/welcome
+
+## Setup
+
 ```bash
 curl -fsSL https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.sh | sudo bash
+sudo apt update && sudo apt install --only-upgrade phosphobot # For update
 ```
 
-## Lancement de phosphobot
-Le service est lancé au démarrage. La commande de lancement du service est la suivante :
+## Run
 ```bash
 phosphobot run
 ```
+> Run on http://localhost:8020
 
-## Accés au service 
-Il faut ouvrir un tunnel ssh pour executer phosphobot en local dans le navigateur
+## Service (autostart at boot)
+
 ```bash
-ssh -p XXXX -L 8020:localhost:8020 user@domain.com -N
+sudo cp phosphobot.service /etc/systemd/system/phosphobot.service
+sudo systemctl daemon-reload
+sudo systemctl enable phosphobot.service
+sudo systemctl start phosphobot.service
+sudo systemctl status phosphobot.service
+sudo journalctl -u phosphobot.service -f
+```
+
+## Remote control with SSH tunnel
+```bash
+ssh -p 2233 -L 8020:localhost:8020 heuzef@heuzef.com -N
 ```
