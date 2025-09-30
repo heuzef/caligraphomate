@@ -1,5 +1,5 @@
 #!/bin/bash
-RUN="imitation_001"
+RUN="imitation_000"
 PUSH_TO_HUB="False"
 EPISODE_TIME_S="30"
 RESET_TIME_S="30"
