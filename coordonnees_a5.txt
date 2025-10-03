@@ -54,3 +54,57 @@ elbow_flex.pos      -50.00
 wrist_flex.pos      -30.00
 wrist_roll.pos      -50.00
 gripper.pos         0.10
+
+
+================================================
+
+MOTOR_UNITS
+
+CENTER
+---
+shoulder_pan.pos    2048
+shoulder_lift.pos   2850 (Appui)
+elbow_flex.pos      2090
+wrist_flex.pos      1365
+wrist_roll.pos      1075
+gripper.pos         1300
+
+
+BOTTOM_RIGHT
+---
+shoulder_pan.pos    2300
+shoulder_lift.pos   2850 (Appui)
+elbow_flex.pos      2360
+wrist_flex.pos      1100
+wrist_roll.pos      1075
+gripper.pos         1300
+
+
+BOTTOM_LEFT
+---
+shoulder_pan.pos    1750
+shoulder_lift.pos   2850 (Appui)
+elbow_flex.pos      2360
+wrist_flex.pos      1100
+wrist_roll.pos      1075
+gripper.pos         1300
+
+
+TOP_RIGHT
+---
+shoulder_pan.pos    2200
+shoulder_lift.pos   3250 (Appui)
+elbow_flex.pos      1180
+wrist_flex.pos      1840
+wrist_roll.pos      1075
+gripper.pos         1300
+
+
+TOP_LEFT
+---
+shoulder_pan.pos    1850
+shoulder_lift.pos   3250 (Appui)
+elbow_flex.pos      1180
+wrist_flex.pos      1840
+wrist_roll.pos      1075
+gripper.pos         1300
