@@ -1,59 +1,68 @@
-1. gripper -> Toujours fermé -> 0.10
-2. wrist_roll -> Toujours à 90° pour tenir le feutre -> -50.00
-3. wrist_flex -> Pour la verticalitée -> -80.00 (centre) / -100.00 (en bas) / -30.00 (en haut)
-4. elbow_flex -> Pour la verticalitée -> 30.00 (centre) / 50.00 (en bas) / -50.00 (en haut)
-5. shoulder_lift -> Pour l'horizontalitée -> 50.00 (centre) / 50.00 (en bas) / 80.00 (en haut)
-6. shoulder_pan -> Pour la direction -> -0.00 (centre) / 10.00 (à droite) / -20.00 (à gauche)
+6. shoulder_pan -> Pour la direction
+5. shoulder_lift -> Pour l'horizontalitée (Pression d'appui sur la feuille)
+4. elbow_flex -> Pour la verticalitée
+3. wrist_flex -> Pour la verticalitée
+2. wrist_roll -> Toujours à 90° pour tenir le feutre
+1. gripper -> Toujours fermé
 
+L'API n'accepetent que les Radians, tandis que le dataset ne prend que les Degrées.
 
 CENTER
 ---
-shoulder_pan.pos    0.00
-shoulder_lift.pos   50.00
-elbow_flex.pos      30.00
-wrist_flex.pos      -80.00
-wrist_roll.pos      -50.00
-gripper.pos         0.10 
 
+{
+  "angles": [
+    0.00,
+    1.20,
+    0.00,
+    -1.00,
+    -1.57,
+    -1.10
+  ],
+  "unit": "rad"
+}
 
 BOTTOM_RIGHT
 ---
-shoulder_pan.pos    10.00
-shoulder_lift.pos   50.00
-elbow_flex.pos      50.00
-wrist_flex.pos      -100.00
-wrist_roll.pos      -50.00
-gripper.pos         0.10
+
+{
+  "angles": [
+    -0.40,
+    1.00,
+    0.50,
+    -1.00,
+    -1.57,
+    -1.10
+  ],
+  "unit": "rad"
+}
 
 
 BOTTOM_LEFT
 ---
-shoulder_pan.pos    -20.00
-shoulder_lift.pos   50.00
-elbow_flex.pos      50.00
-wrist_flex.pos      -100.00
-wrist_roll.pos      -50.00
-gripper.pos         0.10
+
+{
+  "angles": [
+    0.46,
+    1.00,
+    0.50,
+    -1.00,
+    -1.57,
+    -1.10
+  ],
+  "unit": "rad"
+}
 
 
 TOP_RIGHT
 ---
-shoulder_pan.pos    10.00
-shoulder_lift.pos   80.00
-elbow_flex.pos      -50.00
-wrist_flex.pos      -30.00
-wrist_roll.pos      -50.00
-gripper.pos         0.10
+
 
 
 TOP_LEFT
 ---
-shoulder_pan.pos    -20.00
-shoulder_lift.pos   80.00
-elbow_flex.pos      -50.00
-wrist_flex.pos      -30.00
-wrist_roll.pos      -50.00
-gripper.pos         0.10
+
+
 
 
 ================================================
@@ -62,38 +71,54 @@ MOTOR_UNITS
 
 CENTER
 ---
-shoulder_pan.pos    2048
-shoulder_lift.pos   2850 (Appui)
-elbow_flex.pos      2090
-wrist_flex.pos      1365
-wrist_roll.pos      1075
-gripper.pos         1300
+
+{
+  "angles": [
+    2048,
+    2850,
+    2090,
+    1365,
+    1075,
+    1300
+  ],
+  "unit": "motor_units"
+}
 
 
 BOTTOM_RIGHT
 ---
-shoulder_pan.pos    2300
-shoulder_lift.pos   2850 (Appui)
-elbow_flex.pos      2360
-wrist_flex.pos      1100
-wrist_roll.pos      1075
-gripper.pos         1300
 
+{
+  "angles": [
+    2300,
+    2850,
+    2360,
+    1100,
+    1075,
+    1300
+  ],
+  "unit": "motor_units"
+}
 
 BOTTOM_LEFT
 ---
-shoulder_pan.pos    1750
-shoulder_lift.pos   2850 (Appui)
-elbow_flex.pos      2360
-wrist_flex.pos      1100
-wrist_roll.pos      1075
-gripper.pos         1300
 
+{
+  "angles": [
+    1750,
+    2850,
+    2360,
+    1100,
+    1075,
+    1300
+  ],
+  "unit": "motor_units"
+}
 
 TOP_RIGHT
 ---
 shoulder_pan.pos    2200
-shoulder_lift.pos   3250 (Appui)
+shoulder_lift.pos   3250
 elbow_flex.pos      1180
 wrist_flex.pos      1840
 wrist_roll.pos      1075
@@ -103,7 +128,7 @@ gripper.pos         1300
 TOP_LEFT
 ---
 shoulder_pan.pos    1850
-shoulder_lift.pos   3250 (Appui)
+shoulder_lift.pos   3250
 elbow_flex.pos      1180
 wrist_flex.pos      1840
 wrist_roll.pos      1075
