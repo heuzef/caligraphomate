@@ -51,8 +51,7 @@ cp -vr huggingface ~/.cache/
 ```bash
 # Locate USB ports
 python -m lerobot.find_port
-sudo chmod 666 /dev/ttyACM0
-sudo chmod 666 /dev/ttyACM1
+sh permissions.sh
 
 # Setup motors
 python -m lerobot.setup_motors --robot.type=so100_follower --robot.port=$PORT_FOLLOWER
@@ -73,7 +72,7 @@ python -m lerobot.teleoperate --robot.type=so100_follower --robot.port=$PORT_FOL
 ```bash
 cd ~/GIT/caligraphomate
 source ~/GIT/lerobot/.venv/bin/activate
-sudo chmod 666 /dev/ttyACM0 /dev/ttyACM1
+sh permissions.sh
 cat /etc/environment
 ./ctrl/teleoperate.sh 
 ```
