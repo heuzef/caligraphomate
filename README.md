@@ -20,7 +20,7 @@ Use SO-ARM like an Handwriting Machines !
 ```bash
 sudo ufw disable
 sudo apt update ; sudo apt upgrade
-sudo apt-get install -y python3-full ffmpeg cmake build-essential pkg-config libavformat-dev libavcodec-dev libavdevice-dev libavutil-dev libswscale-dev libswresample-dev libavfilter-dev pkg-config python-is-python3 curl
+sudo apt-get install -y python3-full ffmpeg cmake build-essential pkg-config libavformat-dev libavcodec-dev libavdevice-dev libavutil-dev libswscale-dev libswresample-dev libavfilter-dev pkg-config python-is-python3 curl inkscape
 
 git clone https://github.com/huggingface/lerobot.git
 cd lerobot
