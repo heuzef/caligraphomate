@@ -22,12 +22,30 @@ CENTER
   "unit": "rad"
 }
 
+Requête associée :
+
+curl -X 'POST' \
+  'http://heuzef.com:8020/joints/write?robot_id=0' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "angles": [
+    0.00,
+    1.20,
+    0.00,
+    -1.00,
+    -1.57,
+    -1.10
+  ],
+  "unit": "rad"
+}'
+
 BOTTOM_RIGHT
 ---
 
 {
   "angles": [
-    -0.40,
+    -0.46,
     1.00,
     0.50,
     -1.00,
@@ -57,12 +75,32 @@ BOTTOM_LEFT
 TOP_RIGHT
 ---
 
-
+{
+  "angles": [
+    -0.36,
+    1.80,
+    -1.15,
+    -0.46,
+    -1.57,
+    -1.10
+  ],
+  "unit": "rad"
+}
 
 TOP_LEFT
 ---
 
-
+{
+  "angles": [
+    0.36,
+    1.80,
+    -1.15,
+    -0.46,
+    -1.57,
+    -1.10
+  ],
+  "unit": "rad"
+}
 
 
 ================================================
@@ -117,19 +155,30 @@ BOTTOM_LEFT
 
 TOP_RIGHT
 ---
-shoulder_pan.pos    2200
-shoulder_lift.pos   3250
-elbow_flex.pos      1180
-wrist_flex.pos      1840
-wrist_roll.pos      1075
-gripper.pos         1300
 
+{
+  "angles": [
+    2200,
+    3250,
+    1180,
+    1840,
+    1075,
+    1300
+  ],
+  "unit": "motor_units"
+}
 
 TOP_LEFT
 ---
-shoulder_pan.pos    1850
-shoulder_lift.pos   3250
-elbow_flex.pos      1180
-wrist_flex.pos      1840
-wrist_roll.pos      1075
-gripper.pos         1300
+
+{
+  "angles": [
+    1850,
+    3250,
+    1180,
+    1840,
+    1075,
+    1300
+  ],
+  "unit": "motor_units"
+}
