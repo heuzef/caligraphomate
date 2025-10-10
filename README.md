@@ -1,3 +1,9 @@
+<p>
+  <img alt="LeRobot, Hugging Face Robotics Library" src="./caligraphomate.png" width="20%">
+  <br/>
+  <br/>
+</p>
+
 # Caligraphomate
 (C) Heuzef.com - 2025
 
@@ -9,11 +15,6 @@ Use SO-ARM like an Handwriting Machines !
 > Grapho- : Du grec gráphein, signifiant "écrire" ou "dessiner". Cela désigne l'acte de créer du texte ou des images.
 
 > -Mate : Ce suffixe implique souvent une machine, un automate, ou quelque chose qui exécute une fonction automatiquement. Il établit un lien clair avec l'aspect "machine" (du grec mêkhanê) de "mécanique" et la nature automatisée suggérée par "robot" (effectuant la robota, "corvée" ou "travail").
-
-## Ressources
-* https://calligrapher.ai
-* https://axidraw.com
-* "Handwriting Machines" / "Autopen"
 
 ## Quickstart whith LeRobot on Ubuntu
 
