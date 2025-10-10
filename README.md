@@ -1,5 +1,5 @@
 <p>
-  <img alt="LeRobot, Hugging Face Robotics Library" src="./caligraphomate.png" width="20%">
+  <img alt="LeRobot, Hugging Face Robotics Library" src="./caligraphomate.png" width="50%">
   <br/>
   <br/>
 </p>
@@ -93,7 +93,7 @@ sudo apt update && sudo apt install --only-upgrade phosphobot # For update
 ```bash
 phosphobot run
 ```
-> Run on http://localhost:8020
+> Run on http://localhost
 
 ## Service (autostart at boot)
 
@@ -108,5 +108,5 @@ sudo journalctl -u phosphobot.service -f
 
 ## Remote control with SSH tunnel
 ```bash
-ssh -p 2233 -L 8020:localhost:8020 heuzef@heuzef.com -N
+ssh -p 2233 -L 80:localhost:80 heuzef@heuzef.com -N
 ```
