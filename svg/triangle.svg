@@ -4,12 +4,12 @@
 <svg
    width="297mm"
    height="210mm"
-   viewBox="0 0 1122.5197 793.70081"
+   viewBox="0 0 3508 2480"
    version="1.1"
    id="svg1"
    inkscape:version="1.4.2 (ebf0e940d0, 2025-05-08)"
    sodipodi:docname="triangle.svg"
-   inkscape:export-filename="../pdf/etalonnage.pdf"
+   inkscape:export-filename="../pdf/triangle.pdf"
    inkscape:export-xdpi="300"
    inkscape:export-ydpi="300"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
@@ -26,70 +26,17 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
-     inkscape:zoom="0.86417147"
-     inkscape:cx="564.70274"
-     inkscape:cy="396.33338"
+     inkscape:zoom="0.61106151"
+     inkscape:cx="594.86646"
+     inkscape:cy="409.94236"
      inkscape:window-width="2224"
      inkscape:window-height="1178"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="0"
-     inkscape:current-layer="layer2" />
+     inkscape:current-layer="svg1" />
   <defs
      id="defs1" />
-  <g
-     inkscape:label="Calque 1"
-     inkscape:groupmode="layer"
-     id="layer1"
-     style="display:none"
-     sodipodi:insensitive="true">
-    <rect
-       style="fill:none;stroke:#000000;stroke-width:3.82164;stroke-dasharray:none;stroke-opacity:1"
-       id="rect1"
-       width="1118.698"
-       height="789.87915"
-       x="1.91082"
-       y="1.91082" />
-    <rect
-       style="fill:none;stroke:#000000;stroke-width:3.77949;stroke-dasharray:none;stroke-opacity:1"
-       id="rect1-0"
-       width="789.92126"
-       height="555.59058"
-       x="166.29922"
-       y="119.05511" />
-    <rect
-       style="fill:none;stroke:#000000;stroke-width:2.50305;stroke-opacity:1"
-       id="rect2-8"
-       width="1369.0431"
-       height="0.92661977"
-       x="-454.14273"
-       y="-648.33643"
-       transform="matrix(0.81699401,-0.57664616,-0.57579449,-0.81759447,0,0)" />
-    <rect
-       style="fill:none;stroke:#000000;stroke-width:2.50305;stroke-opacity:1"
-       id="rect2-8-7"
-       width="1369.0431"
-       height="0.92661977"
-       x="2.8661013"
-       y="0.11277524"
-       transform="matrix(0.81699401,0.57664616,-0.57579449,0.81759447,0,0)" />
-    <rect
-       style="fill:none;stroke:#000000;stroke-width:2.33292;stroke-opacity:1"
-       id="rect2-7"
-       width="791.36621"
-       height="1.3925047"
-       x="1.0650458"
-       y="-561.98328"
-       transform="matrix(-6.8362705e-5,1,-0.99999998,-1.846008e-4,0,0)" />
-    <rect
-       style="fill:none;stroke:#000000;stroke-width:2.55422;stroke-opacity:1"
-       id="rect2-7-4"
-       width="1119.9646"
-       height="1.179468"
-       x="-1121.3645"
-       y="-397.41718"
-       transform="matrix(-1,-4.0914939e-5,3.0844014e-4,-0.99999995,0,0)" />
-  </g>
   <g
      inkscape:groupmode="layer"
      id="layer2"
@@ -109,8 +56,8 @@
        inkscape:rounded="0"
        inkscape:randomized="0"
        d="M 631.68765,435.30807 424.48519,368.37587 217.28272,301.44366 378.84894,155.46717 540.41516,9.4906703 586.0514,222.39937 Z"
-       inkscape:transform-center-x="-32.097157"
-       inkscape:transform-center-y="-62.371227"
-       transform="rotate(-17.904333,1184.7691,43.243696)" />
+       inkscape:transform-center-x="-39.271739"
+       inkscape:transform-center-y="-76.312922"
+       transform="matrix(3.638354,-1.1754602,1.1754602,3.638354,-223.50252,1123.4468)" />
   </g>
 </svg>
