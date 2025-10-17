@@ -1,8 +1,8 @@
 #!/bin/bash
 RUN="dataset_exemple_001"
 PUSH_TO_HUB="True"
-EPISODE_TIME_S="10"
-RESET_TIME_S="10"
+EPISODE_TIME_S="15"
+RESET_TIME_S="15"
 NUM_EPISODES="1"
 ##############################
 
