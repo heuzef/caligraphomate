@@ -2,3 +2,6 @@ matplotlib
 freetype-py
 pyserial
 svgwrite
+cairosvg
+reportlab
+PyPDF2
