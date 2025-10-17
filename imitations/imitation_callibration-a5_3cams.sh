@@ -13,7 +13,7 @@ if [[ "$1" == "record" ]]; then
         --robot.type=so100_follower \
         --robot.port=$PORT_FOLLOWER \
         --robot.id=follower \
-        --robot.cameras="{ front: {type: opencv, index_or_path: 0, width: 640, height: 480, fps: 30}}" \
+        --robot.cameras="{ front: {type: opencv, index_or_path: /dev/video0, width: 640, height: 480, fps: 30}, top :{type: opencv, index_or_path: /dev/video2, width: 640, height: 480, fps: 30}, outside: {type: opencv, index_or_path: /dev/video4, width: 640, height: 480, fps: 30}}" \
         --teleop.type=so100_leader \
         --teleop.port=$PORT_LEADER \
         --teleop.id=leader \
