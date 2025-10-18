@@ -104,7 +104,7 @@ def record_single_episode(dataset, shape, episode_id, total_episodes, png_path, 
         events["rerecord_episode"] = False
         events["exit_early"] = False
         dataset.clear_episode_buffer()
-        continue
+        return
 
     dataset.save_episode()
 
