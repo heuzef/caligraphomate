@@ -30,7 +30,7 @@ class StaticImageCamera(Camera):
     def _load_image(self, warmup: bool = True) -> None:
         """Load image from file and handle errors."""
         try:
-            path = self.config.path
+            path = Path(self.config.path)
             if not path.exists():
                 raise FileNotFoundError(f"Image file not found: {image_path}")
             
