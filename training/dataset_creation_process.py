@@ -53,7 +53,8 @@ def wait_for_space_or_enter():
         termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
 
 
-def record_single_episode(dataset, shape, episode_id, total_episodes, robot, push=False):
+def record_single_episode(dataset, shape, episode_id, total_episodes,
+                          robot teleop, push=False):
     """Lance un enregistrement pour un épisode unique."""
     print(f" {shape} | Épisode {episode_id + 1}/{total_episodes}")
 
@@ -175,7 +176,7 @@ def record_shape(shape):
         robot.connect()
         teleop.connect()
 
-        record_single_episode(dataset, shape, i, total, robot, push=push) # TO UNCOMMENT
+        record_single_episode(dataset, shape, i, total, robot, teleop, push=push) # TO UNCOMMENT
 
         robot.disconnect()
         teleop.disconnect()
@@ -184,7 +185,7 @@ def record_shape(shape):
             action = wait_for_space_or_enter()
             if action == "push_quit":
                 # push dataset actuel
-                record_single_episode(shape, i, total, png_path, push=True) # TO UNCOMMENT
+                record_single_episode(shape, i, total, robot, teleop, push=True) # TO UNCOMMENT
                 return "quit"
 
     print(f"🚀 Dataset '{shape}' poussé sur Hugging Face !\n")
