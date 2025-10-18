@@ -54,7 +54,7 @@ def wait_for_space_or_enter():
 
 
 def record_single_episode(dataset, shape, episode_id, total_episodes,
-                          robot teleop, push=False):
+                          robot, teleop, push=False):
     """Lance un enregistrement pour un épisode unique."""
     print(f" {shape} | Épisode {episode_id + 1}/{total_episodes}")
 
