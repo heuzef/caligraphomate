@@ -25,10 +25,6 @@ class StaticImageCamera(Camera):
         super().__init__(config)
         self._connected = False
         self._image = None
-        
-        # Load image immediately if path is provided
-        if hasattr(config, 'index_or_path') and config.index_or_path:
-            self._load_image(config.index_or_path)
 
     def _load_image(self, warmup: bool = True) -> None:
         """Load image from file and handle errors."""
@@ -71,8 +67,8 @@ class StaticImageCamera(Camera):
         Args:
             warmup: For compatibility with interface, no warmup needed for static images.
         """
-        if self._image is None and hasattr(self, '_image_path'):
-            self._load_image(self._image_path)
+        if self._image is None:
+            self._load_image()
         
         self._connected = True
         print("Static image camera connected")
