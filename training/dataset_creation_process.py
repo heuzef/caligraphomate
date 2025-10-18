@@ -43,11 +43,32 @@ def record_single_episode(shape, episode_id, total_episodes, png_path, push=Fals
     print(f" {shape} | Épisode {episode_id + 1}/{total_episodes}")
     print(f"  Image targer : {png_path}")
 
-    cameras_arg = (
-        "{ front: {type: opencv, index_or_path: /dev/video0, width: 640, height: 480, fps: 30}, "
-        "top :{type: opencv, index_or_path: /dev/video2, width: 640, height: 480, fps: 30}, "
-        f"target : {{type: opencv, index_or_path: {os.path.abspath(png_path)}, width: 640, height: 480, fps: 25}} }}"
-    )
+    cameras_config = {
+        "front": {
+            "type": "opencv", 
+            "index_or_path": "/dev/video0",
+            "width": 640,
+            "height": 480, 
+            "fps": 30
+        },
+        "top": {
+            "type": "opencv",
+            "index_or_path": "/dev/video2", 
+            "width": 640,
+            "height": 480,
+            "fps": 30
+        },
+        "target": {
+            "type": "opencv",
+            "index_or_path": os.path.abspath(png_path),
+            "width": 640, 
+            "height": 480,
+            "fps": 25
+        }
+    }
+
+    # Convert to string safely
+    cameras_arg = json.dumps(cameras_config).replace('"', '')
 
     command = [
         "python", "-m", "lerobot.record",
