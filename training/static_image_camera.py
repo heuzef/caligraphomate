@@ -23,13 +23,14 @@ class StaticImageCamera(Camera):
                    the path to the image file.
         """
         super().__init__(config)
+        self.config = config
         self._connected = False
         self._image = None
 
     def _load_image(self, warmup: bool = True) -> None:
         """Load image from file and handle errors."""
         try:
-            path = config.path
+            path = self.config.path
             if not path.exists():
                 raise FileNotFoundError(f"Image file not found: {image_path}")
             
