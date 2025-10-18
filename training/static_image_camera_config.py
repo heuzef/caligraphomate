@@ -1,5 +1,4 @@
 from pathlib import Path
-from configs import CameraConfig
 from lerobot.cameras.configs import CameraConfig, ColorMode
 
 
