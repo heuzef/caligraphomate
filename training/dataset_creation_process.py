@@ -46,7 +46,7 @@ def record_single_episode(shape, episode_id, total_episodes, png_path, push=Fals
     cameras_arg = (
         "{ front: {type: opencv, index_or_path: /dev/video0, width: 640, height: 480, fps: 30}, "
         "top :{type: opencv, index_or_path: /dev/video2, width: 640, height: 480, fps: 30}, "
-        f"targer : {{type: image, index_or_path: {os.path.abspath(png_path)}}} }}"
+        f"target : {{type: opencv, index_or_path: {os.path.abspath(png_path)}, width: 640, height: 480, fps: 25}} }}"
     )
 
     command = [
@@ -65,10 +65,12 @@ def record_single_episode(shape, episode_id, total_episodes, png_path, push=Fals
         "--dataset.num_episodes=1",
         f"--dataset.single_task={shape}",
         f"--dataset.push_to_hub={push}",
-        f"--dataset.local_dir=./local_datasets/{shape}"
+        #f"--dataset.local_dir=./local_datasets/{shape}"
     ]
 
+    print("RUNNING IN SUBPROCESS")
     subprocess.run(command, check=True)
+    print("RAN IN SUBPROCESS")
     print(f" Épisode {episode_id + 1}/{total_episodes} terminé.\n")
 
 
