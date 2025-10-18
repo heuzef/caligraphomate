@@ -1,5 +1,6 @@
 from pathlib import Path
 from lerobot.cameras.configs import CameraConfig, ColorMode
+from dataclasses import dataclass
 
 
 @CameraConfig.register_subclass("static_image")
