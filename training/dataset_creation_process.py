@@ -127,14 +127,14 @@ def record_shape(shape):
         "top": OpenCVCameraConfig(index_or_path="/dev/video2", width=640, height=480, fps=FPS)
     }
     robot_config = SO100FollowerConfig(
-        port=PORT_FOLLOWER, id="my_awesome_follower_arm", cameras=camera_config
+        port=PORT_FOLLOWER, id="follower", cameras=camera_config
     )
     robot = SO100Follower(robot_config)
     static_image_conf = StaticImageCameraConfig(path=None)
     robot_config.cameras["target"] = static_image_conf
     robot.cameras["target"] = StaticImageCamera(static_image_conf)
 
-    teleop_config = SO100LeaderConfig(port=PORT_LEADER, id="my_awesome_leader_arm")
+    teleop_config = SO100LeaderConfig(port=PORT_LEADER, id="leader")
 
     teleop = SO100Leader(teleop_config)
 
