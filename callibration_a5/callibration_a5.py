@@ -2,7 +2,7 @@ import requests
 import time
 
 # base_url = "http://heuzef.com:8020"
-base_url = "http://192.168.0.37"
+base_url = "http://127.0.0.1"
 
 headers = {
     "accept": "application/json",
