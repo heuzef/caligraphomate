@@ -4,6 +4,7 @@ import subprocess
 import sys
 import termios
 import tty
+from static_camera import StaticImageCamera
 
 # === CONFIGURATION ===
 SVG_ROOT = "../svg/selected_svg"
@@ -11,7 +12,9 @@ PNG_ROOT = "../png"
 HF_USER = "Heuzef"
 PORT_LEADER = "/dev/ttyACM0"
 PORT_FOLLOWER = "/dev/ttyACM1"
-EPISODE_TIME_S = 15
+EPISODE_TIME_SEC = 60
+RESET_TIME_SEC = 10
+TASK_DESCRIPTION = "Draw the image"
 PUSH_TO_HUB = True
 
 
@@ -38,56 +41,79 @@ def wait_for_space_or_enter():
         termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
 
 
-def record_single_episode(shape, episode_id, total_episodes, png_path, push=False):
+def record_single_episode(dataset, shape, episode_id, total_episodes, png_path, push=False):
     """Lance un enregistrement pour un épisode unique."""
     print(f" {shape} | Épisode {episode_id + 1}/{total_episodes}")
     print(f"  Image targer : {png_path}")
 
-    cameras_config = {
-        "front": {
-            "type": "opencv", 
-            "index_or_path": "/dev/video0",
-            "width": 640,
-            "height": 480, 
-            "fps": 30
-        },
-        "top": {
-            "type": "opencv",
-            "index_or_path": "/dev/video2", 
-            "width": 640,
-            "height": 480,
-            "fps": 30
-        },
-        "target": {
-            "type": "opencv",
-            "index_or_path": os.path.abspath(png_path),
-            "width": 640, 
-            "height": 480,
-            "fps": 25
-        }
+    camera_config = {
+        "front": OpenCVCameraConfig(index_or_path="/dev/video0", width=640, height=480, fps=FPS),
+        "top": OpenCVCameraConfig(index_or_path="/dev/video2", width=640, height=480, fps=FPS),
+        "target": StaticImageCamera(index_or_path=png_path, width=640, height=480, fps=FPS)
     }
+    robot_config = SO100FollowerConfig(
+        port=PORT_FOLLOWER, id="my_awesome_follower_arm", cameras=camera_config
+    )
+    teleop_config = SO100LeaderConfig(port=PORT_LEADER, id="my_awesome_leader_arm")
 
-    # Convert to string safely
-    cameras_arg = json.dumps(cameras_config).replace('"', '')
+# Initialize the robot and teleoperator
+    robot = SO100Follower(robot_config)
+    teleop = SO100Leader(teleop_config)
 
-    command = [
-        "python", "-m", "lerobot.record",
-        "--robot.type=so100_follower",
-        f"--robot.port={PORT_FOLLOWER}",
-        "--robot.id=follower",
-        f"--robot.cameras={cameras_arg}",
-        "--teleop.type=so100_leader",
-        f"--teleop.port={PORT_LEADER}",
-        "--teleop.id=leader",
-        "--display_data=True",
-        f"--dataset.repo_id={HF_USER}/{shape}",
-        f"--dataset.episode_time_s={EPISODE_TIME_S}",
-        "--dataset.reset_time_s=0",
-        "--dataset.num_episodes=1",
-        f"--dataset.single_task={shape}",
-        f"--dataset.push_to_hub={push}",
-        #f"--dataset.local_dir=./local_datasets/{shape}"
-    ]
+# Configure the dataset features
+    action_features = hw_to_dataset_features(robot.action_features, "action")
+    obs_features = hw_to_dataset_features(robot.observation_features, "observation")
+    dataset_features = {**action_features, **obs_features}
+
+# Initialize the keyboard listener and rerun visualization
+    _, events = init_keyboard_listener()
+    init_rerun(session_name="recording")
+
+# Connect the robot and teleoperator
+    robot.connect()
+    teleop.connect()
+
+    log_say(f"Recording episode {episode_id + 1} of {total_episodes}")
+
+    record_loop(
+        robot=robot,
+        events=events,
+        fps=FPS,
+        teleop=teleop,
+        dataset=dataset,
+        control_time_s=EPISODE_TIME_SEC,
+        single_task=TASK_DESCRIPTION,
+        display_data=True,
+    )
+
+    # Reset the environment if not stopping or re-recording
+    if not events["stop_recording"] and (episode_idx < NUM_EPISODES - 1 or events["rerecord_episode"]):
+        log_say("Reset the environment")
+        record_loop(
+            robot=robot,
+            events=events,
+            fps=FPS,
+            teleop=teleop,
+            control_time_s=RESET_TIME_SEC,
+            single_task=TASK_DESCRIPTION,
+            display_data=True,
+        )
+
+    if events["rerecord_episode"]:
+        log_say("Re-recording episode")
+        events["rerecord_episode"] = False
+        events["exit_early"] = False
+        dataset.clear_episode_buffer()
+        continue
+
+    dataset.save_episode()
+
+# Clean up
+    log_say("Stop recording")
+    robot.disconnect()
+    teleop.disconnect()
+    if push:
+        dataset.push_to_hub()
 
     print("RUNNING IN SUBPROCESS")
     subprocess.run(command, check=True)
@@ -114,6 +140,16 @@ def record_shape(shape):
 
     print(f"\n===  Création du dataset '{shape}' ({total} épisodes) ===")
 
+    # Create the dataset
+    dataset = LeRobotDataset.create(
+        repo_id=f"{HF_USER}/{shape}",
+        fps=FPS,
+        features=dataset_features,
+        robot_type=robot.name,
+        use_videos=True,
+        image_writer_threads=4,
+    )
+
     for i, svg_file in enumerate(svg_files):
         png_file = os.path.splitext(svg_file)[0] + ".png"
         png_path = os.path.join(png_dir, png_file)
@@ -125,7 +161,7 @@ def record_shape(shape):
         # Détermine si on push à la fin de l'épisode
         push = (i == total - 1)
 
-        record_single_episode(shape, i, total, png_path, push=push) # TO UNCOMMENT
+        record_single_episode(dataset, shape, i, total, png_path, push=push) # TO UNCOMMENT
 
         if i < total - 1:
             action = wait_for_space_or_enter()
