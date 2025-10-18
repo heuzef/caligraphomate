@@ -4,8 +4,9 @@ import subprocess
 import sys
 import termios
 import tty
-from static_camera import StaticImageCamera
+from static_image_camera import StaticImageCamera
 from lerobot.cameras.opencv.configuration_opencv import OpenCVCameraConfig
+from static_image_camera_config import StaticImageCameraConfig
 from lerobot.datasets.lerobot_dataset import LeRobotDataset
 from lerobot.datasets.utils import hw_to_dataset_features
 from lerobot.robots.so100_follower import SO100Follower, SO100FollowerConfig
@@ -13,7 +14,7 @@ from lerobot.teleoperators.so100_leader.config_so100_leader import SO100LeaderCo
 from lerobot.teleoperators.so100_leader.so100_leader import SO100Leader
 from lerobot.utils.control_utils import init_keyboard_listener
 from lerobot.utils.utils import log_say
-from lerobot.utils.visualization_utils import init_rerun
+from lerobot.utils.visualization_utils import _init_rerun as init_rerun
 from lerobot.record import record_loop
 
 # === CONFIGURATION ===
@@ -142,16 +143,18 @@ def record_shape(shape):
 
         camera_config = {
             "front": OpenCVCameraConfig(index_or_path="/dev/video0", width=640, height=480, fps=FPS),
-            "top": OpenCVCameraConfig(index_or_path="/dev/video2", width=640, height=480, fps=FPS),
-            "target": StaticImageCamera(index_or_path=png_path, width=640, height=480, fps=FPS)
+            "top": OpenCVCameraConfig(index_or_path="/dev/video2", width=640, height=480, fps=FPS)
         }
         robot_config = SO100FollowerConfig(
             port=PORT_FOLLOWER, id="my_awesome_follower_arm", cameras=camera_config
         )
+        robot = SO100Follower(robot_config)
+        new_cfg = StaticImageCameraConfig(path=png_path)
+        robot_config.cameras["target"] = new_cfg
+        robot.cameras["target"] = StaticImageCamera(new_cfg)
+
         teleop_config = SO100LeaderConfig(port=PORT_LEADER, id="my_awesome_leader_arm")
 
-        # Initialize the robot and teleoperator
-        robot = SO100Follower(robot_config)
         teleop = SO100Leader(teleop_config)
 
         # Configure the dataset features

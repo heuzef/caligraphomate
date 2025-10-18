@@ -3,7 +3,9 @@ import cv2
 from pathlib import Path
 from typing import Any
 from lerobot.cameras.camera import Camera
-from lerobot.cameras.configs import CameraConfig, ColorMode
+from lerobot.cameras.configs import ColorMode
+from lerobot.cameras.opencv.configuration_opencv import OpenCVCameraConfig
+from static_image_camera_config import StaticImageCameraConfig
 
 
 class StaticImageCamera(Camera):
@@ -13,7 +15,7 @@ class StaticImageCamera(Camera):
     Useful for testing or when using pre-captured images as camera input.
     """
 
-    def __init__(self, config: CameraConfig):
+    def __init__(self, config: StaticImageCameraConfig):
         """Initialize the static image camera.
         
         Args:
@@ -90,6 +92,7 @@ class StaticImageCamera(Camera):
         """
         if not self.is_connected or self._image is None:
             raise RuntimeError("Static image camera not connected or image not loaded")
+        color_mode = self.color_mode if color_mode is None else color_mode
         
         frame = self._image.copy()
         
