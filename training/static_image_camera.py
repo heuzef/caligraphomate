@@ -32,17 +32,17 @@ class StaticImageCamera(Camera):
         try:
             path = Path(self.config.path)
             if not path.exists():
-                raise FileNotFoundError(f"Image file not found: {image_path}")
+                raise FileNotFoundError(f"Image file not found: {path}")
             
             self._image = cv2.imread(str(path))
             if self._image is None:
-                raise ValueError(f"Failed to load image: {image_path}")
+                raise ValueError(f"Failed to load image: {path}")
                 
             # Resize if dimensions are specified in config
             if self.width is not None and self.height is not None:
                 self._image = cv2.resize(self._image, (self.width, self.height))
                 
-            print(f"Loaded static image: {image_path} (shape: {self._image.shape})")
+            print(f"Loaded static image: {path} (shape: {self._image.shape})")
             
         except Exception as e:
             print(f"Error loading static image: {e}")
