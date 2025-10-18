@@ -104,13 +104,13 @@ def record_shape(shape):
         # Détermine si on push à la fin de l'épisode
         push = (i == total - 1)
 
-        # record_single_episode(shape, i, total, png_path, push=push) # TO UNCOMMENT
+        record_single_episode(shape, i, total, png_path, push=push) # TO UNCOMMENT
 
         if i < total - 1:
             action = wait_for_space_or_enter()
             if action == "push_quit":
                 # push dataset actuel
-                # record_single_episode(shape, i, total, png_path, push=True) # TO UNCOMMENT
+                record_single_episode(shape, i, total, png_path, push=True) # TO UNCOMMENT
                 return "quit"
 
     print(f"🚀 Dataset '{shape}' poussé sur Hugging Face !\n")
