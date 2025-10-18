@@ -88,7 +88,7 @@ class StaticImageCamera(Camera):
         """
         if not self.is_connected or self._image is None:
             raise RuntimeError("Static image camera not connected or image not loaded")
-        color_mode = self.color_mode if color_mode is None else color_mode
+        color_mode = self.config.color_mode if color_mode is None else color_mode
         
         frame = self._image.copy()
         
