@@ -62,10 +62,6 @@ def record_single_episode(dataset, shape, episode_id, total_episodes, png_path, 
     _, events = init_keyboard_listener()
     init_rerun(session_name="recording")
 
-# Connect the robot and teleoperator
-    robot.connect()
-    teleop.connect()
-
     log_say(f"Recording episode {episode_id + 1} of {total_episodes}")
 
     record_loop(
@@ -103,8 +99,6 @@ def record_single_episode(dataset, shape, episode_id, total_episodes, png_path, 
 
 # Clean up
     log_say("Stop recording")
-    robot.disconnect()
-    teleop.disconnect()
     if push:
         dataset.push_to_hub()
 
@@ -177,7 +171,14 @@ def record_shape(shape):
         # Détermine si on push à la fin de l'épisode
         push = (i == total - 1)
 
+        # Connect the robot and teleoperator
+        robot.connect()
+        teleop.connect()
+
         record_single_episode(dataset, shape, i, total, png_path, push=push) # TO UNCOMMENT
+
+        robot.disconnect()
+        teleop.disconnect()
 
         if i < total - 1:
             action = wait_for_space_or_enter()
