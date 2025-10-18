@@ -130,7 +130,7 @@ def record_shape(shape):
         port=PORT_FOLLOWER, id="follower", cameras=camera_config
     )
     robot = SO100Follower(robot_config)
-    static_image_conf = StaticImageCameraConfig(path=None)
+    static_image_conf = StaticImageCameraConfig(path=None, width=640, height=480, fps=FPS)
     robot_config.cameras["target"] = static_image_conf
     robot.cameras["target"] = StaticImageCamera(static_image_conf)
 
