@@ -128,6 +128,37 @@ def record_shape(shape):
         print(f"  Aucun fichier SVG trouvé pour {shape}")
         return
 
+    camera_config = {
+        "front": OpenCVCameraConfig(index_or_path="/dev/video0", width=640, height=480, fps=FPS),
+        "top": OpenCVCameraConfig(index_or_path="/dev/video2", width=640, height=480, fps=FPS)
+    }
+    robot_config = SO100FollowerConfig(
+        port=PORT_FOLLOWER, id="my_awesome_follower_arm", cameras=camera_config
+    )
+    robot = SO100Follower(robot_config)
+    static_image_conf = StaticImageCameraConfig(path=None)
+    robot_config.cameras["target"] = static_image_conf
+    robot.cameras["target"] = StaticImageCamera(static_image_conf)
+
+    teleop_config = SO100LeaderConfig(port=PORT_LEADER, id="my_awesome_leader_arm")
+
+    teleop = SO100Leader(teleop_config)
+
+    # Configure the dataset features
+    action_features = hw_to_dataset_features(robot.action_features, "action")
+    obs_features = hw_to_dataset_features(robot.observation_features, "observation")
+    dataset_features = {**action_features, **obs_features}
+
+    # Create the dataset
+    dataset = LeRobotDataset.create(
+        repo_id=f"{HF_USER}/{shape}",
+        fps=FPS,
+        features=dataset_features,
+        robot_type=robot.name,
+        use_videos=True,
+        image_writer_threads=4
+    )
+
     # ==================== ATTENTION =======================
     total=5
 
@@ -141,36 +172,7 @@ def record_shape(shape):
             print(f" PNG manquant pour {svg_file}, saut de cet épisode.")
             continue
 
-        camera_config = {
-            "front": OpenCVCameraConfig(index_or_path="/dev/video0", width=640, height=480, fps=FPS),
-            "top": OpenCVCameraConfig(index_or_path="/dev/video2", width=640, height=480, fps=FPS)
-        }
-        robot_config = SO100FollowerConfig(
-            port=PORT_FOLLOWER, id="my_awesome_follower_arm", cameras=camera_config
-        )
-        robot = SO100Follower(robot_config)
-        new_cfg = StaticImageCameraConfig(path=png_path)
-        robot_config.cameras["target"] = new_cfg
-        robot.cameras["target"] = StaticImageCamera(new_cfg)
-
-        teleop_config = SO100LeaderConfig(port=PORT_LEADER, id="my_awesome_leader_arm")
-
-        teleop = SO100Leader(teleop_config)
-
-        # Configure the dataset features
-        action_features = hw_to_dataset_features(robot.action_features, "action")
-        obs_features = hw_to_dataset_features(robot.observation_features, "observation")
-        dataset_features = {**action_features, **obs_features}
-
-        # Create the dataset
-        dataset = LeRobotDataset.create(
-            repo_id=f"{HF_USER}/{shape}",
-            fps=FPS,
-            features=dataset_features,
-            robot_type=robot.name,
-            use_videos=True,
-            image_writer_threads=4,
-        )
+        static_image_conf.path = png_path
 
         # Détermine si on push à la fin de l'épisode
         push = (i == total - 1)

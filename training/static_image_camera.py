@@ -25,16 +25,15 @@ class StaticImageCamera(Camera):
         super().__init__(config)
         self._connected = False
         self._image = None
-        self._image_path = config.index_or_path
         
         # Load image immediately if path is provided
         if hasattr(config, 'index_or_path') and config.index_or_path:
             self._load_image(config.index_or_path)
 
-    def _load_image(self, image_path: str) -> None:
+    def _load_image(self, warmup: bool = True) -> None:
         """Load image from file and handle errors."""
         try:
-            path = Path(image_path)
+            path = config.path
             if not path.exists():
                 raise FileNotFoundError(f"Image file not found: {image_path}")
             
