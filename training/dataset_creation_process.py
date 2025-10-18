@@ -53,10 +53,9 @@ def wait_for_space_or_enter():
         termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
 
 
-def record_single_episode(dataset, shape, episode_id, total_episodes, png_path, push=False):
+def record_single_episode(dataset, shape, episode_id, total_episodes, robot, push=False):
     """Lance un enregistrement pour un épisode unique."""
     print(f" {shape} | Épisode {episode_id + 1}/{total_episodes}")
-    print(f"  Image targer : {png_path}")
 
 # Initialize the keyboard listener and rerun visualization
     _, events = init_keyboard_listener()
@@ -166,6 +165,7 @@ def record_shape(shape):
             print(f" PNG manquant pour {svg_file}, saut de cet épisode.")
             continue
 
+        print(f"  Image targer : {png_path}")
         static_image_conf.path = png_path
 
         # Détermine si on push à la fin de l'épisode
@@ -175,7 +175,7 @@ def record_shape(shape):
         robot.connect()
         teleop.connect()
 
-        record_single_episode(dataset, shape, i, total, png_path, push=push) # TO UNCOMMENT
+        record_single_episode(dataset, shape, i, total, robot, push=push) # TO UNCOMMENT
 
         robot.disconnect()
         teleop.disconnect()
