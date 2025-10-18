@@ -38,19 +38,17 @@ def wait_for_space_or_enter():
         termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
 
 
-def record_single_episode(shape, episode_id, total_episodes, png_path):
+def record_single_episode(shape, episode_id, total_episodes, png_path, push=False):
     """Lance un enregistrement pour un épisode unique."""
     print(f" {shape} | Épisode {episode_id + 1}/{total_episodes}")
-    print(f" Image Target: {png_path}")
+    print(f"  Image targer : {png_path}")
 
-    # Définition des caméras
     cameras_arg = (
         "{ front: {type: opencv, index_or_path: /dev/video0, width: 640, height: 480, fps: 30}, "
         "top :{type: opencv, index_or_path: /dev/video2, width: 640, height: 480, fps: 30}, "
-        f"target: {{type: image, index_or_path: {os.path.abspath(png_path)}}} }}"
+        f"targer : {{type: image, index_or_path: {os.path.abspath(png_path)}}} }}"
     )
 
-    # Commande d'enregistrement
     command = [
         "python", "-m", "lerobot.record",
         "--robot.type=so100_follower",
@@ -66,7 +64,7 @@ def record_single_episode(shape, episode_id, total_episodes, png_path):
         "--dataset.reset_time_s=0",
         "--dataset.num_episodes=1",
         f"--dataset.single_task={shape}",
-        f"--dataset.push_to_hub={PUSH_TO_HUB if episode_id + 1 == total_episodes else False}",
+        f"--dataset.push_to_hub={push}",
         f"--dataset.local_dir=./local_datasets/{shape}"
     ]
 
