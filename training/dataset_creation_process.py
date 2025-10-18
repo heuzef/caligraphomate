@@ -23,8 +23,8 @@ PNG_ROOT = "../png"
 HF_USER = "Heuzef"
 PORT_LEADER = "/dev/ttyACM0"
 PORT_FOLLOWER = "/dev/ttyACM1"
-EPISODE_TIME_SEC = 60
-RESET_TIME_SEC = 10
+EPISODE_TIME_SEC = 10
+RESET_TIME_SEC = 5
 TASK_DESCRIPTION = "Draw the image"
 PUSH_TO_HUB = True
 FPS=30
@@ -102,9 +102,6 @@ def record_single_episode(dataset, shape, episode_id, total_episodes,
     if push:
         dataset.push_to_hub()
 
-    print("RUNNING IN SUBPROCESS")
-    subprocess.run(command, check=True)
-    print("RAN IN SUBPROCESS")
     print(f" Épisode {episode_id + 1}/{total_episodes} terminé.\n")
 
 
@@ -154,11 +151,13 @@ def record_shape(shape):
     )
 
     # ==================== ATTENTION =======================
-    total=5
+    total=10
 
     print(f"\n===  Création du dataset '{shape}' ({total} épisodes) ===")
 
     for i, svg_file in enumerate(svg_files):
+        print(f"\n\nFor loop iteration {i} file {svg_file}")
+        print(f"START")
         png_file = os.path.splitext(svg_file)[0] + ".png"
         png_path = os.path.join(png_dir, png_file)
 
@@ -194,7 +193,7 @@ def record_shape(shape):
 
 def main():
     try:
-        shapes = sorted(os.listdir(SVG_ROOT))
+        shapes = sorted(s for s in os.listdir(SVG_ROOT) if s == "rectangle")  # WARNING circle DIRTY AF
         for shape in shapes:
             result = record_shape(shape)
             if result == "quit":
