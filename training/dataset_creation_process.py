@@ -132,35 +132,6 @@ def record_shape(shape):
 
     print(f"\n===  Création du dataset '{shape}' ({total} épisodes) ===")
 
-    camera_config = {
-        "front": OpenCVCameraConfig(index_or_path="/dev/video0", width=640, height=480, fps=FPS),
-        "top": OpenCVCameraConfig(index_or_path="/dev/video2", width=640, height=480, fps=FPS),
-        "target": StaticImageCamera(index_or_path=png_path, width=640, height=480, fps=FPS)
-    }
-    robot_config = SO100FollowerConfig(
-        port=PORT_FOLLOWER, id="my_awesome_follower_arm", cameras=camera_config
-    )
-    teleop_config = SO100LeaderConfig(port=PORT_LEADER, id="my_awesome_leader_arm")
-
-    # Initialize the robot and teleoperator
-    robot = SO100Follower(robot_config)
-    teleop = SO100Leader(teleop_config)
-
-    # Configure the dataset features
-    action_features = hw_to_dataset_features(robot.action_features, "action")
-    obs_features = hw_to_dataset_features(robot.observation_features, "observation")
-    dataset_features = {**action_features, **obs_features}
-
-    # Create the dataset
-    dataset = LeRobotDataset.create(
-        repo_id=f"{HF_USER}/{shape}",
-        fps=FPS,
-        features=dataset_features,
-        robot_type=robot.name,
-        use_videos=True,
-        image_writer_threads=4,
-    )
-
     for i, svg_file in enumerate(svg_files):
         png_file = os.path.splitext(svg_file)[0] + ".png"
         png_path = os.path.join(png_dir, png_file)
@@ -168,6 +139,35 @@ def record_shape(shape):
         if not os.path.exists(png_path):
             print(f" PNG manquant pour {svg_file}, saut de cet épisode.")
             continue
+
+        camera_config = {
+            "front": OpenCVCameraConfig(index_or_path="/dev/video0", width=640, height=480, fps=FPS),
+            "top": OpenCVCameraConfig(index_or_path="/dev/video2", width=640, height=480, fps=FPS),
+            "target": StaticImageCamera(index_or_path=png_path, width=640, height=480, fps=FPS)
+        }
+        robot_config = SO100FollowerConfig(
+            port=PORT_FOLLOWER, id="my_awesome_follower_arm", cameras=camera_config
+        )
+        teleop_config = SO100LeaderConfig(port=PORT_LEADER, id="my_awesome_leader_arm")
+
+        # Initialize the robot and teleoperator
+        robot = SO100Follower(robot_config)
+        teleop = SO100Leader(teleop_config)
+
+        # Configure the dataset features
+        action_features = hw_to_dataset_features(robot.action_features, "action")
+        obs_features = hw_to_dataset_features(robot.observation_features, "observation")
+        dataset_features = {**action_features, **obs_features}
+
+        # Create the dataset
+        dataset = LeRobotDataset.create(
+            repo_id=f"{HF_USER}/{shape}",
+            fps=FPS,
+            features=dataset_features,
+            robot_type=robot.name,
+            use_videos=True,
+            image_writer_threads=4,
+        )
 
         # Détermine si on push à la fin de l'épisode
         push = (i == total - 1)
