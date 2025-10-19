@@ -4,6 +4,7 @@ import subprocess
 import sys
 import termios
 import tty
+from pathlib import Path
 from static_image_camera import StaticImageCamera
 from lerobot.cameras.opencv.configuration_opencv import OpenCVCameraConfig
 from static_image_camera_config import StaticImageCameraConfig
@@ -98,7 +99,7 @@ def infer(jpg_files):
     robot_config.cameras["target"] = static_image_conf
     robot.cameras["target"] = StaticImageCamera(static_image_conf)
 
-    policy = ACTPolicy.from_pretrained(pretrained_name_or_path=HF_MODEL_ID)
+    policy = ACTPolicy.from_pretrained(pretrained_name_or_path=Path(HF_MODEL_ID))
 
     # Configure the dataset features
     action_features = hw_to_dataset_features(robot.action_features, "action")
@@ -107,7 +108,7 @@ def infer(jpg_files):
 
     # Create the dataset
     dataset = LeRobotDataset.create(
-        repo_id=f"{HF_USER}/{shape}_v1",
+        repo_id=f"{HF_USER}/eval_v1",
         fps=FPS,
         features=dataset_features,
         robot_type=robot.name,
