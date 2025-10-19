@@ -132,10 +132,9 @@ def infer(jpg_files):
         print(f"  Image target : {jpg_file}")
         static_image_conf.path = jpg_file
 
-        # Connect the robot and teleoperator
         robot.connect()
 
-        infer_one_episode(dataset, i, total, robot, teleop) # TO UNCOMMENT
+        infer_one_episode(dataset, i, total, robot, policy) # TO UNCOMMENT
 
         robot.disconnect()
 
