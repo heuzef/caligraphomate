@@ -53,8 +53,7 @@ def wait_for_space_or_enter():
         termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
 
 
-def infer_one_episode(dataset, shape, episode_id, total_episodes,
-                      robot, policy):
+def infer_one_episode(dataset, episode_id, total_episodes, robot, policy):
     print(f" Épisode {episode_id + 1}/{total_episodes}")
 
 # Initialize the keyboard listener and rerun visualization
@@ -119,8 +118,6 @@ def infer(jpg_files):
     # ==================== ATTENTION =======================
     # total=10
 
-    print(f"\n===  Création du dataset '{shape}' ({total} épisodes) ===")
-
     for i, jpg_file in enumerate(jpg_files):
         if not os.path.exists(jpg_file):
             print(f"  Fichier '{jpg_file}' introuvable.")
@@ -138,7 +135,7 @@ def infer(jpg_files):
         # Connect the robot and teleoperator
         robot.connect()
 
-        infer_one_episode(dataset, shape, i, total, robot, teleop) # TO UNCOMMENT
+        infer_one_episode(dataset, i, total, robot, teleop) # TO UNCOMMENT
 
         robot.disconnect()
 
