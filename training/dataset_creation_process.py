@@ -18,8 +18,7 @@ from lerobot.utils.visualization_utils import _init_rerun as init_rerun
 from lerobot.record import record_loop
 
 # === CONFIGURATION ===
-SVG_ROOT = "../svg/selected_svg"
-PNG_ROOT = "../jpg"
+JPG_ROOT = "../jpg"
 HF_USER = "Heuzef"
 PORT_LEADER = "/dev/ttyACM0"
 PORT_FOLLOWER = "/dev/ttyACM1"
@@ -104,16 +103,15 @@ def record_single_episode(dataset, shape, episode_id, total_episodes,
 
 def record_shape(shape):
     """Crée un dataset Hugging Face pour une forme donnée."""
-    svg_dir = os.path.join(SVG_ROOT, shape)
-    png_dir = os.path.join(PNG_ROOT, shape)
-    if not os.path.isdir(svg_dir) or not os.path.isdir(png_dir):
-        print(f"  Forme '{shape}' introuvable dans svg/ ou png/.")
+    jpg_dir = os.path.join(JPG_ROOT, shape)
+    if not os.path.isdir(jpg_dir):
+        print(f"  Forme '{shape}' introuvable dans jpg.")
         return
 
-    svg_files = sorted(f for f in os.listdir(svg_dir) if f.endswith(".svg"))
-    total = len(svg_files)
+    jpg_dir = sorted(f for f in os.listdir(jpg_dir) if f.endswith(".jpg"))
+    total = len(jpg_dir)
     if total == 0:
-        print(f"  Aucun fichier SVG trouvé pour {shape}")
+        print(f"  Aucun fichier JPG trouvé pour {shape}")
         return
 
     camera_config = {
@@ -152,22 +150,21 @@ def record_shape(shape):
 
     print(f"\n===  Création du dataset '{shape}' ({total} épisodes) ===")
 
-    for i, svg_file in enumerate(svg_files):
-        print(f"\n\nFor loop iteration {i} file {svg_file}")
+    for i, jpg_file in enumerate(jpg_dir):
+        print(f"\n\nFor loop iteration {i} file {jpg_file}")
         print(f"START")
         action = wait_for_space_or_enter()
         if action == "push_quit":
             dataset.push_to_hub()
             return "quit"
-        png_file = os.path.splitext(svg_file)[0] + ".jpg"
-        png_path = os.path.join(png_dir, png_file)
+        jpg_path = os.path.join(jpg_dir, jpg_file)
 
-        if not os.path.exists(png_path):
-            print(f" PNG manquant pour {svg_file}, saut de cet épisode.")
+        if not os.path.exists(jpg):
+            print(f" JPG manquant pour {jpg_file}, saut de cet épisode.")
             continue
 
-        print(f"  Image targer : {png_path}")
-        static_image_conf.path = png_path
+        print(f"  Image targer : {jpg_path}")
+        static_image_conf.path = jpg_path
 
         # Détermine si on push à la fin de l'épisode
         push = (i == total - 1)
@@ -190,7 +187,7 @@ def record_shape(shape):
 
 def main():
     try:
-        shapes = sorted(s for s in os.listdir(SVG_ROOT) if s == "rectangle")  # WARNING circle DIRTY AF
+        shapes = sorted(s for s in os.listdir(SVG_ROOT) if s in ["polygon"])  # WARNING circle DIRTY AF
         for shape in shapes:
             result = record_shape(shape)
             if result == "quit":
