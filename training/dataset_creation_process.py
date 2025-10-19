@@ -26,7 +26,6 @@ PORT_FOLLOWER = "/dev/ttyACM1"
 EPISODE_TIME_SEC = 10
 RESET_TIME_SEC = 0
 TASK_DESCRIPTION = "Draw the image"
-PUSH_TO_HUB = True
 FPS=30
 
 
@@ -54,7 +53,7 @@ def wait_for_space_or_enter():
 
 
 def record_single_episode(dataset, shape, episode_id, total_episodes,
-                          robot, teleop, push=False):
+                          robot, teleop):
     """Lance un enregistrement pour un épisode unique."""
     print(f" {shape} | Épisode {episode_id + 1}/{total_episodes}")
 
@@ -99,8 +98,6 @@ def record_single_episode(dataset, shape, episode_id, total_episodes,
 
 # Clean up
     log_say("Stop recording")
-    if push:
-        dataset.push_to_hub()
 
     print(f" Épisode {episode_id + 1}/{total_episodes} terminé.\n")
 
@@ -158,6 +155,10 @@ def record_shape(shape):
     for i, svg_file in enumerate(svg_files):
         print(f"\n\nFor loop iteration {i} file {svg_file}")
         print(f"START")
+        action = wait_for_space_or_enter()
+        if action == "push_quit":
+            dataset.push_to_hub()
+            return "quit"
         png_file = os.path.splitext(svg_file)[0] + ".jpg"
         png_path = os.path.join(png_dir, png_file)
 
@@ -175,17 +176,13 @@ def record_shape(shape):
         robot.connect()
         teleop.connect()
 
-        record_single_episode(dataset, shape, i, total, robot, teleop, push=push) # TO UNCOMMENT
+        record_single_episode(dataset, shape, i, total, robot, teleop) # TO UNCOMMENT
 
         robot.disconnect()
         teleop.disconnect()
 
-        if i < total - 1:
-            action = wait_for_space_or_enter()
-            if action == "push_quit":
-                # push dataset actuel
-                record_single_episode(dataset, shape, i, total, robot, teleop, push=True) # TO UNCOMMENT
-                return "quit"
+        if push:
+            dataset.push_to_hub()
 
     print(f"🚀 Dataset '{shape}' poussé sur Hugging Face !\n")
     return "continue"
