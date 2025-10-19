@@ -24,7 +24,7 @@ HF_MODEL_ID = f"{HF_USER}/act_rectangle_v2"
 #HF_MODEL_ID = f"lerobot/act_aloha_sim_transfer_cube_human"
 PORT_LEADER = "/dev/ttyACM0"
 PORT_FOLLOWER = "/dev/ttyACM1"
-EPISODE_TIME_SEC = 10
+EPISODE_TIME_SEC = 30
 RESET_TIME_SEC = 0
 TASK_DESCRIPTION = "Draw the image"
 FPS=30
@@ -143,7 +143,7 @@ def infer(jpg_files):
 
 def main():
     try:
-        jpg_files = [f"{JPG_ROOT}/rectangle/rectangle_001.jpg"]
+        jpg_files = [f"{JPG_ROOT}/rectangle/rectangle_060.jpg"]
         result = infer(jpg_files)
     except KeyboardInterrupt:
         print("\n Script interrompu par l'utilisateur. Arrêt propre.")
