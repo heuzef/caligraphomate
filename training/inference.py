@@ -10,7 +10,6 @@ from lerobot.cameras.opencv.configuration_opencv import OpenCVCameraConfig
 from static_image_camera_config import StaticImageCameraConfig
 from lerobot.datasets.lerobot_dataset import LeRobotDataset
 from lerobot.datasets.utils import hw_to_dataset_features
-from lerobot.policies.factory import make_pre_post_processors
 from lerobot.robots.so100_follower import SO100Follower, SO100FollowerConfig
 from lerobot.policies.act.modeling_act import ACTPolicy
 from lerobot.utils.control_utils import init_keyboard_listener
