@@ -87,10 +87,6 @@ def infer_one_episode(dataset, shape, episode_id, total_episodes,
 
 def infer(jpg_files):
     """Crée un dataset Hugging Face pour une forme donnée."""
-    if not os.path.exists(jpg_file):
-        print(f"  Fichier '{jpg_file}' introuvable.")
-        return
-
     camera_config = {
         "front": OpenCVCameraConfig(index_or_path="/dev/video0", width=640, height=480, fps=FPS),
         "top": OpenCVCameraConfig(index_or_path="/dev/video2", width=640, height=480, fps=FPS)
@@ -126,6 +122,10 @@ def infer(jpg_files):
     print(f"\n===  Création du dataset '{shape}' ({total} épisodes) ===")
 
     for i, jpg_file in enumerate(jpg_files):
+        if not os.path.exists(jpg_file):
+            print(f"  Fichier '{jpg_file}' introuvable.")
+            continue
+
         print(f"\n\nFor loop iteration {i} file {svg_file}")
         print(f"START")
         action = wait_for_space_or_enter()
