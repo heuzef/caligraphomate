@@ -63,19 +63,19 @@ def infer_one_episode(dataset, episode_id, total_episodes, robot, policy):
 
     print(f"Infer episode {episode_id + 1} of {total_episodes}")
 
-    preprocessor, postprocessor = make_pre_post_processors(
-        policy_cfg=policy,
-        pretrained_path=HF_MODEL_ID,
-        dataset_stats=dataset.meta.stats,
-    )
+#   preprocessor, postprocessor = make_pre_post_processors(
+#       policy_cfg=policy,
+#       pretrained_path=HF_MODEL_ID,
+#       dataset_stats=dataset.meta.stats,
+#   )
 
     record_loop(
         robot=robot,
         events=events,
         fps=FPS,
         policy=policy,
-        preprocessor=preprocessor,
-        postprocessor=postprocessor,
+#       preprocessor=preprocessor,
+#       postprocessor=postprocessor,
         dataset=dataset,
         control_time_s=EPISODE_TIME_SEC,
         single_task=TASK_DESCRIPTION,
