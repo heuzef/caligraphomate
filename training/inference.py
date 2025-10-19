@@ -116,7 +116,7 @@ def infer(jpg_files):
     )
 
     # ==================== ATTENTION =======================
-    # total=10
+    total=len(jpg_files)
 
     for i, jpg_file in enumerate(jpg_files):
         if not os.path.exists(jpg_file):
