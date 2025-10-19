@@ -98,7 +98,7 @@ def infer(jpg_files):
     robot_config.cameras["target"] = static_image_conf
     robot.cameras["target"] = StaticImageCamera(static_image_conf)
 
-    policy = ACTPolicy.from_pretrained(HF_MODEL_ID)
+    policy = ACTPolicy.from_pretrained(pretrained_name_or_path=HF_MODEL_ID)
 
     # Configure the dataset features
     action_features = hw_to_dataset_features(robot.action_features, "action")
