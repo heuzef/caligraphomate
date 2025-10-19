@@ -18,7 +18,6 @@ from lerobot.utils.visualization_utils import _init_rerun as init_rerun
 from lerobot.record import record_loop
 
 # === CONFIGURATION ===
-SVG_ROOT = "../svg/selected_svg"
 JPG_ROOT = "../jpg"
 HF_USER = "Heuzef"
 HF_MODEL_ID = f"lerobot/act_aloha_sim_transfer_cube_human"
@@ -123,7 +122,7 @@ def infer(jpg_files):
             print(f"  Fichier '{jpg_file}' introuvable.")
             continue
 
-        print(f"\n\nFor loop iteration {i} file {svg_file}")
+        print(f"\n\nFor loop iteration {i} file {jpg_file}")
         print(f"START")
         action = wait_for_space_or_enter()
         if action == "quit":
