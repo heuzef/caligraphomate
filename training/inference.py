@@ -131,8 +131,6 @@ def infer(jpg_files):
         action = wait_for_space_or_enter()
         if action == "quit":
             return "quit"
-        png_file = os.path.splitext(svg_file)[0] + ".jpg"
-        png_path = os.path.join(png_dir, png_file)
 
         print(f"  Image target : {jpg_file}")
         static_image_conf.path = jpg_file
