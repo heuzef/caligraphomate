@@ -187,7 +187,7 @@ def record_shape(shape):
 
 def main():
     try:
-        shapes = sorted(s for s in os.listdir(SVG_ROOT) if s in ["polygon"])  # WARNING circle DIRTY AF
+        shapes = sorted(s for s in os.listdir(JPG_ROOT) if s in ["polygon"])  # WARNING circle DIRTY AF
         for shape in shapes:
             result = record_shape(shape)
             if result == "quit":
