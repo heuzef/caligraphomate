@@ -21,7 +21,7 @@ from lerobot.record import record_loop
 SVG_ROOT = "../svg/selected_svg"
 JPG_ROOT = "../jpg"
 HF_USER = "Heuzef"
-HF_MODEL_ID = f"{HF_USER}/act_rectangle_v1"
+HF_MODEL_ID = f"lerobot/act_aloha_sim_transfer_cube_human"
 PORT_LEADER = "/dev/ttyACM0"
 PORT_FOLLOWER = "/dev/ttyACM1"
 EPISODE_TIME_SEC = 10
@@ -99,7 +99,7 @@ def infer(jpg_files):
     robot_config.cameras["target"] = static_image_conf
     robot.cameras["target"] = StaticImageCamera(static_image_conf)
 
-    policy = ACTPolicy.from_pretrained(pretrained_name_or_path=Path(HF_MODEL_ID))
+    policy = ACTPolicy.from_pretrained(HF_MODEL_ID)
 
     # Configure the dataset features
     action_features = hw_to_dataset_features(robot.action_features, "action")
