@@ -19,12 +19,12 @@ from lerobot.record import record_loop
 
 # === CONFIGURATION ===
 SVG_ROOT = "../svg/selected_svg"
-PNG_ROOT = "../png"
+PNG_ROOT = "../jpg"
 HF_USER = "Heuzef"
 PORT_LEADER = "/dev/ttyACM0"
 PORT_FOLLOWER = "/dev/ttyACM1"
 EPISODE_TIME_SEC = 10
-RESET_TIME_SEC = 5
+RESET_TIME_SEC = 0
 TASK_DESCRIPTION = "Draw the image"
 PUSH_TO_HUB = True
 FPS=30
@@ -142,7 +142,7 @@ def record_shape(shape):
 
     # Create the dataset
     dataset = LeRobotDataset.create(
-        repo_id=f"{HF_USER}/{shape}",
+        repo_id=f"{HF_USER}/{shape}_v1",
         fps=FPS,
         features=dataset_features,
         robot_type=robot.name,
@@ -151,14 +151,14 @@ def record_shape(shape):
     )
 
     # ==================== ATTENTION =======================
-    total=10
+    # total=10
 
     print(f"\n===  Création du dataset '{shape}' ({total} épisodes) ===")
 
     for i, svg_file in enumerate(svg_files):
         print(f"\n\nFor loop iteration {i} file {svg_file}")
         print(f"START")
-        png_file = os.path.splitext(svg_file)[0] + ".png"
+        png_file = os.path.splitext(svg_file)[0] + ".jpg"
         png_path = os.path.join(png_dir, png_file)
 
         if not os.path.exists(png_path):
@@ -184,7 +184,7 @@ def record_shape(shape):
             action = wait_for_space_or_enter()
             if action == "push_quit":
                 # push dataset actuel
-                record_single_episode(shape, i, total, robot, teleop, push=True) # TO UNCOMMENT
+                record_single_episode(dataset, shape, i, total, robot, teleop, push=True) # TO UNCOMMENT
                 return "quit"
 
     print(f"🚀 Dataset '{shape}' poussé sur Hugging Face !\n")

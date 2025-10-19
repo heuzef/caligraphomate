@@ -1,9 +1,10 @@
 #!/bin/bash
-RUN="dataset_exemple_001"
+RUN=$2
 PUSH_TO_HUB="True"
 EPISODE_TIME_S="15"
 RESET_TIME_S="15"
-NUM_EPISODES="1"
+NUM_EPISODES="5"
+TASK="draw a circle"
 ##############################
 
 if [[ "$1" == "record" ]]; then
@@ -13,7 +14,7 @@ if [[ "$1" == "record" ]]; then
         --robot.type=so100_follower \
         --robot.port=$PORT_FOLLOWER \
         --robot.id=follower \
-        --robot.cameras="{ front: {type: opencv, index_or_path: /dev/video0, width: 640, height: 480, fps: 30}, top :{type: opencv, index_or_path: /dev/video2, width: 640, height: 480, fps: 30}, outside: {type: opencv, index_or_path: /dev/video4, width: 640, height: 480, fps: 30}}" \
+        --robot.cameras="{ front: {type: opencv, index_or_path: /dev/video0, width: 640, height: 480, fps: 30}, top :{type: opencv, index_or_path: /dev/video2, width: 640, height: 480, fps: 30}}" \
         --teleop.type=so100_leader \
         --teleop.port=$PORT_LEADER \
         --teleop.id=leader \
@@ -23,7 +24,7 @@ if [[ "$1" == "record" ]]; then
         --dataset.episode_time_s=$EPISODE_TIME_S \
         --dataset.reset_time_s=$RESET_TIME_S \
         --dataset.num_episodes=$NUM_EPISODES \
-        --dataset.single_task="$RUN"
+        --dataset.single_task="$TASK"
 
 elif [[ "$1" == "replay" ]]; then
     echo "Replaying $RUN"
