@@ -20,8 +20,8 @@ from lerobot.record import record_loop
 # === CONFIGURATION ===
 JPG_ROOT = "../jpg"
 HF_USER = "Heuzef"
-HF_MODEL_ID = f"{HF_USER}/act_rectangle_v1"
-# HF_MODEL_ID = f"lerobot/act_aloha_sim_transfer_cube_human"
+HF_MODEL_ID = f"{HF_USER}/act_rectangle_v2"
+#HF_MODEL_ID = f"lerobot/act_aloha_sim_transfer_cube_human"
 PORT_LEADER = "/dev/ttyACM0"
 PORT_FOLLOWER = "/dev/ttyACM1"
 EPISODE_TIME_SEC = 10
