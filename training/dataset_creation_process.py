@@ -108,7 +108,7 @@ def record_shape(shape):
         print(f"  Forme '{shape}' introuvable dans jpg.")
         return
 
-    jpg_dir = sorted(f for f in os.listdir(jpg_dir) if f.endswith(".jpg"))
+    jpg_files = sorted(f for f in os.listdir(jpg_dir) if f.endswith(".jpg"))
     total = len(jpg_dir)
     if total == 0:
         print(f"  Aucun fichier JPG trouvé pour {shape}")
@@ -150,7 +150,7 @@ def record_shape(shape):
 
     print(f"\n===  Création du dataset '{shape}' ({total} épisodes) ===")
 
-    for i, jpg_file in enumerate(jpg_dir):
+    for i, jpg_file in enumerate(jpg_files):
         print(f"\n\nFor loop iteration {i} file {jpg_file}")
         print(f"START")
         action = wait_for_space_or_enter()
@@ -159,7 +159,7 @@ def record_shape(shape):
             return "quit"
         jpg_path = os.path.join(jpg_dir, jpg_file)
 
-        if not os.path.exists(jpg):
+        if not os.path.exists(jpg_path):
             print(f" JPG manquant pour {jpg_file}, saut de cet épisode.")
             continue
 
