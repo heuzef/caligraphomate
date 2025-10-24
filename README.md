@@ -9,6 +9,25 @@
 
 Use SO-ARM like an Handwriting Machines !
 
+## Context
+As part of a Hackathon (Hack1Robo 2025 Bordeaux, France).
+
+We worked on making the SO-ARM capable of writing on an A4 sheet of paper. Feel free to contact me if you're working on a similar project! I'd be happy to share our progress with you.
+
+A few elements that might interest you here for your project:
+
+- Design of a gripper to hold pens; well proven.
+- Creation of a library for LeRobot "StaticImageCamera" to convert an image file into video, via a simulated camera, in order to define a target.
+- Creation of a rectangle drawing dataset: https://lerobot-visualize-dataset.hf.space/Heuzef/rectangle_v1/episode_0
+- Training of somes models and provision of an inference script to allow you to play with them : https://huggingface.co/Heuzef/models
+- Large collection of geometric shapes and drawings to create quality datasets in A5 format on A4 sheets.
+
+<p>
+  <img alt="LeRobot, Hugging Face Robotics Library" src="./preview.jpg" width="80%">
+  <br/>
+  <br/>
+</p>
+
 ## Étymologie
 > Cali- : Du grec kállos, signifiant "beauté". Cela ancre immédiatement le mot dans la qualité esthétique que l'on retrouve en calligraphie.
 
@@ -17,7 +36,6 @@ Use SO-ARM like an Handwriting Machines !
 > -Mate : Ce suffixe implique souvent une machine, un automate, ou quelque chose qui exécute une fonction automatiquement. Il établit un lien clair avec l'aspect "machine" (du grec mêkhanê) de "mécanique" et la nature automatisée suggérée par "robot" (effectuant la robota, "corvée" ou "travail").
 
 ## Quickstart whith LeRobot on Ubuntu
-
 ```bash
 sudo ufw disable
 sudo apt update ; sudo apt upgrade
@@ -34,7 +52,6 @@ pip install ".[aloha,feetech]"
 ```
 
 ## Setup Caligraphomate
-
 ```bash
 sudo echo HUGGINGFACE_TOKEN=********** >> /etc/environment
 git config --global credential.helper store
@@ -78,7 +95,7 @@ cat /etc/environment
 ./ctrl/teleoperate.sh 
 ```
 
-# Phosphobot
+# Phosphobot (optionnal, for API control if needed)
 
 > Open source service for full web control the Arm La documentatin est accessible ici : https://docs.phospho.ai/welcome
 
